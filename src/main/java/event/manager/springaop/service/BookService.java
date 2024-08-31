@@ -53,15 +53,19 @@ public class BookService {
     }
 
     public CustomResponse<Book> addBook(Book book) {
-        Book newBook = null;
-        try {
-            log.info("Попытка добавить книгу с нзванием {}", book.getTitle());
-            newBook = bookRepository.save(book);
-        } catch (Exception e) {
-            return new CustomResponse<>(null, CustomStatus.EXCEPTION);
-        }
-
-        log.info("Книга с названием {} успешно сохранена", book.getTitle());
+//        w/o aspects
+//        Book newBook = null;
+//        try {
+//            log.info("Попытка добавить книгу с нзванием {}", book.getTitle());
+//            newBook = bookRepository.save(book);
+//        } catch (Exception e) {
+//            return new CustomResponse<>(null, CustomStatus.EXCEPTION);
+//        }
+//
+//        log.info("Книга с названием {} успешно сохранена", book.getTitle());
+//        return new CustomResponse<>(Stream.of(newBook).collect(Collectors.toList()), CustomStatus.SUCCESS);
+//        after AOP
+        Book newBook = bookRepository.save(book);
         return new CustomResponse<>(Stream.of(newBook).collect(Collectors.toList()), CustomStatus.SUCCESS);
 
     }
